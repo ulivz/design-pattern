@@ -44,5 +44,6 @@ Sub.prototype.getA = function () {
 
 var instance = new Sub();
 
+
 console.log(instance);
 
