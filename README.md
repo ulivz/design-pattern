@@ -1,7 +1,7 @@
 # Description
 
 For JavaScript is so flexible 😑 , according to different business narsceios, using the appropriate design 
-pattern to write code, is a qualified front-end-developer of the road😛.
+pattern to write code, is a consciousness which a front-end-developer must master🛩.
 
 # Typescript
 
