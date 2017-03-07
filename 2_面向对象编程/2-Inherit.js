@@ -1,3 +1,5 @@
+// Inherit - 继承
+
 /* 类式继承
  ========================================================================== */
 function SuperClass() {
@@ -133,7 +135,7 @@ var book = {
 
 function createBook(obj) {
     var o = new inheritObject(obj);
-46    o.getName = function () {
+     o.getName = function () {
         return this.name;
     }
     return o;
@@ -142,6 +144,10 @@ var ibook = new createBook(book);
 console.log(ibook);
 
 
+/* 寄生组合式继承
+   ========================================================================== */
+
+// 请看：２_parasitic_combination_inherit.js
 
 
 

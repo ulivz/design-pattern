@@ -25,4 +25,4 @@ var FrontEndDeveloper = (function (_super) {
     return FrontEndDeveloper;
 }(People));
 // TS在这里真地实现了private吗? 
-//# sourceMappingURL=2_ts_test.js.map
+//# sourceMappingURL=2-ts-test.js.map

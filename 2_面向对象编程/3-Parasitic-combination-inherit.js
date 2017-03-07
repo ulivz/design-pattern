@@ -1,4 +1,4 @@
-/* parasitic combination inherit
+/* Parasitic combination inherit - 多态组合式继承
  * 一时兴起写了英文注释　＝_＝
  ========================================================================== */
 
@@ -43,7 +43,6 @@ Sub.prototype.getA = function () {
 }
 
 var instance = new Sub();
-
 
 console.log(instance);
 

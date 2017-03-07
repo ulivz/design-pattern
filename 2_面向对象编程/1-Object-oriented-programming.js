@@ -1,3 +1,5 @@
+// Object-oriented-programming - 面向对象的编程
+
 function People() {
     this.name = '';
     this.age = '';
