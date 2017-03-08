@@ -26,5 +26,8 @@ var personTemplateObject = {
 }
 
 
-var Person = protoTypeExtend(personTemplateObject)
-// 如此一来，Person这个类就建好了，所有在模板对象中的方法都已经建立好了.
+var chl = protoTypeExtend(personTemplateObject)
+// 如此一来，Person这个对象就建好了，所有在模板对象中的方法都已经建立好了.
+// 既然通过protoTypeExtend创造直接是一个对象,因此我们就无需再new, 可以直接使用这个对象
+
+
