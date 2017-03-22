@@ -7,16 +7,21 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Observer</title>
 </head>
-<body onload="init()">
+<body >
 
-<script src="./Observer.js"></script>
+
 <input type="button" value="CCTV ->" id="cctv">
 <input type="text" id="cctvText">
+<button id="cancelCCTV">取消订阅</button>
 <br>
-<input type="button" value="NFDSB ->" id="nfdsb">
-<input type="text" id="nfdsbText">
+<input type="button" value="BTV ->" id="btv">
+<input type="text" id="btvText">
+<button id="cancelBTV">取消订阅</button>
 <br>
 <textarea name="" id="info" cols="60" rows="20"></textarea>
+
+<script src="./lib.js"></script>
+<script src="./Observer.js"></script>
 
 </body>
 </html>

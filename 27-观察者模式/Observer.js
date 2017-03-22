@@ -4,7 +4,6 @@
  * 目的：对程序的内在变化进行观察，当其有变化的时候，外界（观察者）可以得知，并且可以做出相应的变化
  */
 
-
 // 管理订阅者的类
 function Observer(name) {
 	this.name = name;
@@ -16,29 +15,37 @@ function Observer(name) {
 Observer.prototype.send = function (news) {
 	// 给每个订阅者推送消息
 	this.watchers.forEach(function (subscriber) {
-		subscriber(news, this)
+		subscriber.run(this, news)
 	}.bind(this))
 }
 
+
+function Subscriber(run) {
+	this.run = run;
+}
+
 // 订阅
-Function.prototype.subscribe = function (publisher) {
-	var that = this;
+Subscriber.prototype.subscribe = function (publisher) {
+
 	// 只要至少有一次返回true，就为true
-	var alreadyExists = publisher.watchers.some(function (el) {
+	var alreadySubscribe = publisher.watchers.some(function (el) {
 		// 订阅后不能再订阅
-		if (el == that) {
+		if (el == this) {
 			return;
 		}
-	})
-	if (!alreadyExists) {
-		publisher.watchers.push(that)
+	}.bind(this))
+
+	if (!alreadySubscribe) {
+		publisher.watchers.push(this)
 	}
+	// 可以连续订阅
 	return this;
 }
 
 // 取消订阅
-Function.prototype.unsubscribe = function (publisher) {
+Subscriber.prototype.unSubscribe = function (publisher) {
 	var that = this;
+	console.log(publisher.watchers)
 	publisher.watchers = publisher.watchers.filter(
 		function (el) {
 			if (el !== that) {
@@ -49,36 +56,36 @@ Function.prototype.unsubscribe = function (publisher) {
 	return this;
 }
 
-var b1 = new Observer('CCTV')
-var b2 = new Observer('NFDUB')
+// 实例化多个观察者
+var CCTV = new Observer('CCTV')
+var BTV = new Observer('BTV')
 
-// 门面模式
-function addEvent(el, type, fn) {
-	if (window.addEventListener) {
-		// firefox
-		el.addEventListener(type, fn, false)
-	} else if (window.attachEvent) {
-		// ie
-		el.attachEvent('on' + type, fn)
-	} else {
-		el['on' + type] = fn;
-	}
-}
+// 实例化订阅者
+var subscriber = new Subscriber(function (updateObserver, news) {
+	document.getElementById('info').value =
+		'Found' + '[' + updateObserver.name + '] ->' + news;
+})
+
+// 开始订阅
+subscriber.subscribe(CCTV).subscribe(BTV)
+
+console.log(subscriber)
+
+addEvent(document.getElementById('cctv'), 'click', function () {
+	CCTV.send(document.getElementById('cctvText').value)
+})
+
+addEvent(document.getElementById('btv'), 'click', function () {
+	BTV.send(document.getElementById('btvText').value)
+})
 
 
-function init() {
+addEvent(document.getElementById('cancelCCTV'), 'click', function () {
+	subscriber.unSubscribe(CCTV)
+})
 
-	var pageOne = function (news) {
-		document.getElementById('info').value =
-			'Found' + '[' + arguments[1].name + '] ->' + news;
-	}
+addEvent(document.getElementById('cancelBTV'), 'click', function () {
+	subscriber.unSubscribe(BTV)
+})
 
-	pageOne.subscribe(b1).subscribe(b2)
-	addEvent(document.getElementById('cctv'), 'click', function () {
-		b1.send(document.getElementById('cctvText').value)
-	})
 
-	addEvent(document.getElementById('nfdsb'), 'click', function () {
-		b2.send(document.getElementById('nfdsbText').value)
-	})
-}
