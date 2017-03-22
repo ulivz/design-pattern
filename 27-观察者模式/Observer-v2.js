@@ -1,5 +1,5 @@
 function Observer(name) {
-	this.name = name;
+	this.value = name;
 	this.subscribers = new Array();
 }
 
@@ -11,7 +11,7 @@ Observer.prototype = {
 		})
 	},
 	getMessage: function (msg) {
-		console.log('[' + this.name + '] Receive the msg from ' + msg)
+		console.log('[' + this.value + '] Receive the msg from ' + msg)
 		return msg;
 	},
 	// 订阅
@@ -51,12 +51,12 @@ Alibaba.subscribe(aCoder).subscribe(anotherCoder);
 Huawei.subscribe(aCoder);
 Google.subscribe(aCoder);
 
-Alibaba.publish(Alibaba.name)
-Huawei.publish(Huawei.name)
-Google.publish(Google.name)
+Alibaba.publish(Alibaba.value)
+Huawei.publish(Huawei.value)
+Google.publish(Google.value)
 
 aCoder.subscribe(Alibaba).subscribe(Huawei).subscribe(Google)
-aCoder.publish(aCoder.name)
+aCoder.publish(aCoder.value)
 
 
 
